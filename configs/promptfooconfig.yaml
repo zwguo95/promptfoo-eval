@@ -28,7 +28,7 @@ defaultTest:
 
 tests:
   - dataset: file://datasets/tests.csv
-    prompt: mcq-letter-only
+    prompt: file://prompts/mcq-letter-only.txt
     tags: ["test", "accuracy"]
     assertions:
       - type: equals
@@ -41,7 +41,7 @@ tests:
         max: 8000
 
   - dataset: file://datasets/tests.csv
-    prompt: mcq-rationale-citations
+    prompt: file://prompts/mcq-rationale-citations.txt
     tags: ["test", "rationale"]
     assertions:
       - type: not-contains
