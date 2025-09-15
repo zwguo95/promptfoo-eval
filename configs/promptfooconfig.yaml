@@ -1,17 +1,13 @@
 description: "Evaluation for Social Safety Net Chatbot (letter-only accuracy + rationale & citations)"
 
 providers:
-  - file: configs/providers.yaml
+  - file: file://configs/providers.yaml
 
-# Import prompts from files to keep config tidy
 prompts:
-  - label: mcq-letter-only
-    role: user
-    file: prompts/mcq-letter-only.txt
-
-  - label: mcq-rationale-citations
-    role: user
-    file: prompts/mcq-rationale-citations.txt
+  - id: file://prompts/mcq-letter-only.txt
+    label: mcq-letter-only
+  - id: file://prompts/mcq-rationale-citations.txt
+    label: mcq-rationale-citations
 
 defaultTest:
   vars:
@@ -56,14 +52,14 @@ tests:
         provider: openai:gpt-4o-mini
         weight: 0.3
 
+scoring:
+  - file: file://configs/scoring.yaml
+
 view:
   showLatency: true
   groupBy: ["provider", "tags"]
 
 outputPath: "results/${ISO_TIMESTAMP}"
-
-scoring:
-  - file: configs/scoring.yaml
 
 providersOptions:
   http:nava-dst:

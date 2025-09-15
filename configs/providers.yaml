@@ -15,6 +15,6 @@ providers:
         }
       transformResponse: "json ? json.response_text : ''"
   
-  - id: openai:gpt-4.1-mini
+  - id: openai:gpt-4o-mini
     config:
       apiKey: ${OPENAI_API_KEY}
