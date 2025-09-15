@@ -17,9 +17,22 @@ The evaluation pipeline checks:
 npm install -g promptfoo
 ```
 
-### 1. Install dependencies
+### 2. Configure API keys
+```env
+OPENAI_API_KEY = "YOUR_API_KEY"
+```
 
-### Repo Structure
+### 3. Run evaluations
+```bash
+promptfoo eval -c configs/promptfooconfig.yaml
+```
+
+### 4. View results
+```bash
+promptfoo view results/latest
+```
+
+## Repo Structure
 ```bash
 configs/
   promptfooconfig.yaml    
