@@ -1,0 +1,20 @@
+providers:
+  - id: http:nava-dst
+    config:
+      url: https://decision-support-tool-dev.navateam.com/api/query
+      method: POST
+      headers:
+        Content-Type: application/json
+      body: |
+        {
+          "chat_history": [],
+          "session_id": "{{uniqueSessionId}}",
+          "new_session": true,
+          "message": "{{question}}",
+          "user_id": "promptfoo-evaluator"
+        }
+      transformResponse: "json ? json.response_text : ''"
+  
+  - id: openai:gpt-4.1-mini
+    config:
+      apiKey: ${OPENAI_API_KEY}

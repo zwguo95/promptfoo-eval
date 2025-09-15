@@ -1,0 +1,71 @@
+description: "Evaluation for Social Safety Net Chatbot (letter-only accuracy + rationale & citations)"
+
+providers:
+  - file: configs/providers.yaml
+
+# Import prompts from files to keep config tidy
+prompts:
+  - label: mcq-letter-only
+    role: user
+    file: prompts/mcq-letter-only.txt
+
+  - label: mcq-rationale-citations
+    role: user
+    file: prompts/mcq-rationale-citations.txt
+
+defaultTest:
+  vars:
+    uniqueSessionId: file://./generateUniqueId.js
+  options:
+    temperature: 0
+    timeout: 360000
+  evaluateOptions:
+    seed: 42
+    maxConcurrency: 4
+  view:
+    showLatency: true
+    showCosts: true
+
+tests:
+  - dataset: file://datasets/tests.csv
+    prompt: mcq-letter-only
+    tags: ["test", "accuracy"]
+    assertions:
+      - type: equals
+        value: "{{answer_key}}"
+        trim: true
+        ignoreCase: true
+      - type: not-contains
+        value: "I can't help with that"
+      - type: latency
+        max: 8000
+
+  - dataset: file://datasets/tests.csv
+    prompt: mcq-rationale-citations
+    tags: ["test", "rationale"]
+    assertions:
+      - type: not-contains
+        value: "I can't help with that"
+      - type: latency
+        max: 12000
+    graders:
+      - rubric: rubrics/rationale_quality.md
+        provider: openai:gpt-4o-mini
+        weight: 0.7
+      - rubric: rubrics/groundedness.md
+        provider: openai:gpt-4o-mini
+        weight: 0.3
+
+view:
+  showLatency: true
+  groupBy: ["provider", "tags"]
+
+outputPath: "results/${ISO_TIMESTAMP}"
+
+scoring:
+  - file: configs/scoring.yaml
+
+providersOptions:
+  http:nava-dst:
+    headers:
+      Content-Type: application/json

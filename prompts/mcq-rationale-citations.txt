@@ -1,0 +1,8 @@
+Please answer this multiple choice question about SNAP. 
+
+Output format:
+- First line: the answer letter ONLY (A, B, C, D, or E)
+- Second line: "Rationale: " followed by a concise 1–2 sentence justification
+- Third line: "Citations: " followed by at least one URL or document identifier actually used
+
+{{question}}

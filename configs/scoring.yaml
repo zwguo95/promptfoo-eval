@@ -1,0 +1,16 @@
+weights:
+  # --- Core Metric ---
+  # factual correctness
+  equals: 0.75
+
+  # --- Secondary Metrics ---
+  # llm as judge (rationale, groundedness)
+  graders: 0.20
+
+  # safety and runtime
+  not-contains: 0.03
+  latency: 0.02
+
+scoreClamp:
+  min: 0
+  max: 1
