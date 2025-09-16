@@ -1,0 +1,4 @@
+id: openai:gpt-4o-mini
+label: openai-gpt4o-mini
+config:
+  apiKey: ${OPENAI_API_KEY}   # will be read from .env
