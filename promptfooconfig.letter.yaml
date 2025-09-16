@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+
+prompts:
+  - file://prompts/mcq-letter-only.txt
+
+providers:
+  - file://configs/nava-provider.yaml
+
+tests: file://tests/dataset.csv
+
+defaultTest:
+  vars:
+    uniqueSessionId: file://scripts/generateUniqueId.js
+  assert:
+    - type: regex
+      value: '^[A-E]$'
+    - type: equals
+      value: '{{__expected}}'

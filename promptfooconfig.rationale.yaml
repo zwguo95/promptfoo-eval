@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+
+prompts:
+  - file://prompts/mcq-rationale.txt
+
+providers:
+  - file://configs/nava-provider.yaml
+
+tests:
+  - path: file://tests/dataset.csv
+    assert:
+      # Judge rationale quality (line 2 only)
+      - type: llm-rubric
+        provider: openai:o4-mini
+        value: file://rubrics/rationale_quality.txt
+        threshold: 0.7
+        options:
+          transform: |
+            const l = String(output || '').split(/\r?\n/);
+            return (l[1] || '').replace(/^Rationale:\s*/i, '').trim();
+
+      # Judge groundedness (line 3 only)
+      - type: llm-rubric
+        provider: openai:o4-mini
+        value: file://rubrics/groundedness.txt
+        threshold: 0.7
+        options:
+          transform: |
+            const l = String(output || '').split(/\r?\n/);
+            return (l[2] || '').replace(/^Citations:\s*/i, '').trim();
+
+defaultTest:
+  vars:
+    uniqueSessionId: file://scripts/generateUniqueId.js
+
+outputPath: "results/latest.csv"
