@@ -9,21 +9,23 @@ providers:
 tests:
   - path: file://tests/dataset.csv
     assert:
-      # Judge rationale quality (line 2 only)
+      # 2) Rationale QUALITY (judge only the rationale line)
       - type: llm-rubric
         provider: openai:o4-mini
         value: file://rubrics/rationale_quality.txt
         threshold: 0.7
+        metric: rationale_quality
         options:
           transform: |
             const l = String(output || '').split(/\r?\n/);
             return (l[1] || '').replace(/^Rationale:\s*/i, '').trim();
 
-      # Judge groundedness (line 3 only)
+      # 3) GROUNDEDNESS (judge only the citations line)
       - type: llm-rubric
         provider: openai:o4-mini
         value: file://rubrics/groundedness.txt
         threshold: 0.7
+        metric: groundedness
         options:
           transform: |
             const l = String(output || '').split(/\r?\n/);
@@ -32,5 +34,6 @@ tests:
 defaultTest:
   vars:
     uniqueSessionId: file://scripts/generateUniqueId.js
+  assert: [] # suppress default __expected check
 
 outputPath: "results/latest.csv"
