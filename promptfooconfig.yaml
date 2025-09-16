@@ -1,13 +1,18 @@
 description: "Evaluation for Social Safety Net Chatbot (letter-only accuracy + rationale & citations)"
 
-prompts:
-- response
+defaultTest:
+  vars:
+    uniqueSessionId: file://configs/generateUniqueId.js
 
 providers: 
   - file://configs/nava-provider.yaml
-  # - file://configs/openai-provider.yaml
 
-tests:
-  - file://datasets/tests.csv
+tests: file://datasets/tests.csv
+
+evaluateOptions:
+  delay: 5
+  cache: true
+  maxConcurrency: 4
+  showProgressBar: true
 
 outputPath: "results/latest_result.csv"

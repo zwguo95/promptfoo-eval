@@ -5,7 +5,7 @@ config:
     Content-Type: application/json
   body:
       chat_history: []
-      session_id: "42"
+      session_id: "{{uniqueSessionId}}"
       new_session: true
       message: "{{question}}"
       user_id: "promptfoo-evaluator"
