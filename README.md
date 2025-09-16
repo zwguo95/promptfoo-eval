@@ -37,7 +37,7 @@ Users should provide their own **OpenAI/Nava API config** (via `.env` or provide
 1. **Install Promptfoo**  
    ```bash
    npm install -g promptfoo
-````
+   ```
 
 2. **Configure API keys**
    Create `.env` in the repo root (add `.env` to `.gitignore`):
