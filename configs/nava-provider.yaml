@@ -1,0 +1,12 @@
+id: https://decision-support-tool-dev.navateam.com/api/query
+config:
+  method: POST
+  headers:
+    Content-Type: application/json
+  body:
+      chat_history: []
+      session_id: "42"
+      new_session: true
+      message: "{{question}}"
+      user_id: "promptfoo-evaluator"
+  transformResponse: "json ? json.response_text : ''"

@@ -1,0 +1,13 @@
+description: "Evaluation for Social Safety Net Chatbot (letter-only accuracy + rationale & citations)"
+
+prompts:
+- response
+
+providers: 
+  - file://configs/nava-provider.yaml
+  # - file://configs/openai-provider.yaml
+
+tests:
+  - file://datasets/tests.csv
+
+outputPath: "results/latest_result.csv"

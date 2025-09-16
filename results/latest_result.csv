@@ -1,12 +1,20 @@
-question,__expected
+question,[https://decision-support-tool-dev.navateam.com/api/query] response
 "The client presents receipts for medical expenses and would like to deduct them. Which of these are valid medical expense deductions? [Select one correct answer.]
  A. Personal care items (e.g., toothpaste, soap, shampoo)
  B. Menstrual products (e.g., sanitary pads, tampons, menstrual cups)
  C. Special diets
  D. Prescription medications
- E. Over-the-counter vitamins without a prescription from a medical provider","contains: D"
+ E. Over-the-counter vitamins without a prescription from a medical provider","[ERROR] (0.00)
+
+No output
+---
+No output"
 "The client reports a household change that affects their application. Which of these changes can impact their unit composition calculation for eligibility? [Select one correct answer.]
  A. A new roommate moves in but does not purchase or prepare meals with the client
  B. A child under 18 joins the household
  C. A roommate who does not share meals with the client moves out
- D. A 30 year-old non-dependent adult child living in the household begins to earn an income, but they do not share food and meals with the client","contains: B"
+ D. A 30 year-old non-dependent adult child living in the household begins to earn an income, but they do not share food and meals with the client","[ERROR] (0.00)
+
+No output
+---
+No output"

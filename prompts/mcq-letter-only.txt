@@ -1,6 +1,5 @@
-Please answer this multiple choice question about SNAP. 
-
-Return ONLY the final answer letter (A, B, C, D, or E).
-Do not add any words, punctuation, or explanation.
+Please answer this multiple choice question about SNAP.
 
 {{question}}
+
+Return ONLY the final answer letter (A, B, C, D, or E).

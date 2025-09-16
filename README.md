@@ -50,3 +50,11 @@ results/
 README.md 
 ```
 
+## OpenAI Provider
+
+- Create your own provider file locally under `configs/openai-provider.yaml` with content like:
+  ```yaml
+  - id: openai:gpt-4o-mini
+    config:
+      apiKey: ${OPENAI_API_KEY}
+  ```
