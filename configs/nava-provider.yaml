@@ -1,4 +1,5 @@
 id: https://decision-support-tool-dev.navateam.com/api/query
+label: "nava"
 config:
   method: POST
   headers:
@@ -10,4 +11,3 @@ config:
       message: "{{prompt}}"
       user_id: "promptfoo-evaluator"
   transformResponse: "json ? json.response_text : ''"
-  label: "nava"
