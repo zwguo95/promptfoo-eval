@@ -7,6 +7,7 @@ config:
       chat_history: []
       session_id: "{{uniqueSessionId}}"
       new_session: true
-      message: "{{question}}"
+      message: "{{prompt}}"
       user_id: "promptfoo-evaluator"
   transformResponse: "json ? json.response_text : ''"
+  label: "nava"

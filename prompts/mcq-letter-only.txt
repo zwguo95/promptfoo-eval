@@ -1,5 +1,12 @@
-Please answer this multiple choice question about SNAP.
+You are a strict multiple-choice grader for SNAP policy questions.
 
+RULES:
+- Output ONLY the letter of your choice: A, B, C, D, or E.
+- No words, punctuation, spaces, or rationale — just the single uppercase letter.
+- If uncertain, choose the most defensible option per SNAP/USDA policy logic.
+- Never output anything except one of: A B C D E
+
+QUESTION:
 {{question}}
 
-Return ONLY the final answer letter (A, B, C, D, or E).
+Answer:

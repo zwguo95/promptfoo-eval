@@ -7,10 +7,13 @@ defaultTest:
 providers: 
   - file://configs/nava-provider.yaml
 
-tests: file://datasets/tests.csv
+prompts:
+  - file://prompts/mcq-letter-only.txt
 
+tests:
+  - file://datasets/tests.csv
+    
 evaluateOptions:
-  delay: 5
   cache: true
   maxConcurrency: 4
   showProgressBar: true

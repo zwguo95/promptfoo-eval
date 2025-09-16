@@ -12,51 +12,57 @@ The evaluation pipeline checks:
 
 ## Current Structure
 
-- `configs/generateUniqueId.js` — helper script for consistent IDs
-- `configs/nava-provider.yaml` — provider config (Nava backend)
-- `datasets/tests.csv` — benchmark dataset (MCQ format)
-- `promptfooconfig.yaml` — main Promptfoo config
-- `README.md` — documentation (this file)
+- `configs/generateUniqueId.js` — helper script for consistent IDs  
+- `configs/nava-provider.yaml` — provider config (Nava backend; expects `{{prompt}}`)  
+- `dataset/tests.csv` — benchmark dataset (MCQ format, includes `question` and `__expected`)  
+- `prompts/mcq-letter-only.txt` — wrapper prompt for factual accuracy tests  
+- `promptfooconfig.yaml` — main Promptfoo config  
+- `README.md` — documentation (this file)  
 
-Users are expected to provide their own **OpenAI API config** (via `.env` or provider YAML).  
-We plan to make this more standardized once external providers are fully integrated.
+Users should provide their own **OpenAI/Nava API config** (via `.env` or provider YAML).
 
 ---
 
 ## Current Functionality
 
-- **MCQ factual accuracy**  
-  - Uses dataset `tests.csv` with `__expected` answers.  
-  - Evaluated via `equals` and `contains` assertions.
+- **Letter-only MCQ evaluation**  
+  - CSV contains `question` and `__expected` (like `A`, `B`, etc.).  
+  - Prompt wrapper enforces single-letter answers.  
+  - Assertions check both output shape (`^[A-E]$`) and match with `__expected`.
 
-- **Rationale evaluation (draft)**  
-  - Rubric-based scoring (`gpt-4o-mini` as judge).  
-  - Checks quality and groundedness of explanations.  
+---
+
+## Usage
+
+1. **Install Promptfoo**  
+   ```bash
+   npm install -g promptfoo
+````
+
+2. **Configure API keys**
+   Create `.env` in the repo root (add `.env` to `.gitignore`):
+
+   ```bash
+   OPENAI_API_KEY="your_api_key_here"
+   ```
+
+3. **Run evaluations**
+
+   ```bash
+   # Run all tests (letter-only by default)
+   npx promptfoo eval -c promptfooconfig.yaml
+
+   # View results interactively
+   npx promptfoo view -c promptfooconfig.yaml
+   ```
+
+   > In the viewer, enable **Table Settings → Show full prompt** to confirm that the wrapper prompt is being sent instead of the raw question.
 
 ---
 
 ## Planned Improvements
 
-1. **Wrapper prompt for MCQs**  
-   - Transform CSV question + expected answer into a provider-ready prompt.  
-   - Ensure models return **letter-only** answers for factual tests.
-
-2. **Full response grading**  
-   - Expand tests to include rationale generation.  
-   - Apply rubrics for **quality** and **groundedness**.
-
-3. **Hybrid test blocks**  
-   - Support both:
-     - Inline/custom prompts (ad-hoc experiments)  
-     - Dataset-driven evaluations (CSV)  
-   - Allow running subsets with `tags: [letter-only, rationale]`.
-
----
-
-## Next Steps
-
-- [ ] Implement wrapper prompt for MCQ factual correctness.  
-- [ ] Finalize rationale & groundedness rubrics.  
-- [ ] Update `promptfooconfig.yaml` with multiple tagged test blocks.  
-- [ ] Document usage examples in README (factual-only vs rationale).  
-- [ ] Standardize OpenAI provider config for easier onboarding.  
+* Add **rationale scenario**: full answer with rationale and citations.
+* Add **rubric-based grading** with `gpt-4o-mini` as judge for rationale quality and groundedness.
+* Support running subsets with tags (`--tags letter-only`, `--tags rationale`).
+* Standardize provider configs for easier onboarding.
